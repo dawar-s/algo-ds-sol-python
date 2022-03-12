@@ -46,19 +46,27 @@ class BST:
                 current = current.right
 
         if current is not None and current.value == value:
+            # if node to be removed is a leaf node
+            # go to parent and simply delete the reference
             if current.__isleafnode__():
                 if parent.value > value:
                     parent.left = None
                 else:
                     parent.right = None
+
+            # if node to be deleted has 2 children
             elif current.__hastwochildren__():
+                # get the smallest node from right subtree
                 smallestnode, smallestnodeparent = current.__getsmallestnode__()
+                # set the value of current to be the smallest node value
                 current.value = smallestnode.value
                 if smallestnodeparent is None:
+                    # when the subtree to the right of node to be deleted has just one node
                     current.right = None
                 else:
                     smallestnodeparent.left = None
             else:
+                # This is the case of root node to be deleted
                 if parent is None:
                     if current.right is None:
                         self.value = current.left.value
@@ -71,6 +79,7 @@ class BST:
                             smallestnode = None
                         else:
                             smallestnodeparent.left = None
+                # Node to be deleted is other than root node
                 elif parent.value <= current.value:
                     if current.left is not None:
                         parent.right = current.left
@@ -104,15 +113,3 @@ class BST:
             parent = current
             current = current.left
         return current, parent
-
-
-
-class TestProgram:
-    def test_case_1(self):
-        root = BST(10)
-        root.insert(5)
-        root.remove(10)
-        print(root.value)
-
-
-TestProgram().test_case_1()
