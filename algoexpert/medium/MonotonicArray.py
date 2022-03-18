@@ -1,12 +1,12 @@
 def isMonotonic(array):
-    isIncreasing = True
-    isDecreasing = True
+    is_increasing = True
+    is_decreasing = True
 
     for i in range(1, len(array)):
         if array[i] < array[i - 1]:
-            isIncreasing = False
+            is_increasing = False
         elif array[i] > array[i - 1]:
-            isDecreasing = False
+            is_decreasing = False
 
-    return isIncreasing or isDecreasing
+    return is_increasing or is_decreasing
 
