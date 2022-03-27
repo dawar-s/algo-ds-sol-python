@@ -1,18 +1,16 @@
-def numberOfWaysToTraverseGraph(width, height, memo=None, row=0, col=0):
-    if row == height - 1 and col == width - 1:
+def numberOfWaysToTraverseGraph(width, height, memo=None):
+    if height == 1 or width == 1:
         return 1
-    if row == height or col == width:
-        return 0
     if memo is None:
         memo = {}
-    key = str(row) + ',' + str(col)
+    key = str(height) + ',' + str(width)
     if key in memo:
         return memo[key]
 
-    memo[key] = numberOfWaysToTraverseGraph(width, height, memo, row + 1, col) + \
-                numberOfWaysToTraverseGraph(width, height, memo, row, col + 1)
+    memo[key] = numberOfWaysToTraverseGraph(width - 1, height, memo) + \
+                numberOfWaysToTraverseGraph(width, height - 1, memo)
 
     return memo[key]
 
 
-print(numberOfWaysToTraverseGraph(3, 2))
+print(numberOfWaysToTraverseGraph(10, 10))
