@@ -6,11 +6,13 @@ class MinHeap:
         # Do not edit the line below.
         self.heap = self.buildHeap(array)
 
+    # O(n) time | O(1) space
     def buildHeap(self, array):
         for parent_node_idx in range((len(array) - 2) // 2, -1, -1):
             self.siftDown(array, parent_node_idx)
         return array
 
+    # O(log(n)) time | O(1) space
     def siftDown(self, heap, idx=0):
         parent_idx = idx
         left_child_idx = 2 * parent_idx + 1
@@ -27,6 +29,7 @@ class MinHeap:
             else:
                 return
 
+    # O(log(n)) time | O(1) space
     def siftUp(self, heap):
         idx = len(heap) - 1
         parent_idx = (idx - 1) // 2
@@ -37,11 +40,13 @@ class MinHeap:
             idx = parent_idx
             parent_idx = (idx - 1) // 2
 
+    # O(1) time | O(1) space
     def peek(self):
         if len(self.heap) == 0:
             raise IndexError('peek from an empty heap')
         return self.heap[0]
 
+    # O(log(n)) time | O(1) space
     def remove(self):
         if len(self.heap) == 0:
             raise IndexError('remove from an empty heap')
@@ -52,6 +57,7 @@ class MinHeap:
         self.siftDown(self.heap)
         return removed_value
 
+    # O(log(n)) time | O(1) space
     def insert(self, value):
         self.heap.append(value)
         self.siftUp(self.heap)
